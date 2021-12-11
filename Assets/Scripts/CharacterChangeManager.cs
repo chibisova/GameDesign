@@ -37,7 +37,8 @@ public class CharacterChangeManager : MonoBehaviour
     private int modifier = 10;
 
     // Modes
-    public enum State {Baseline, Calm, Stress, Excited, Focus}
+    public enum State {Baseline, Calm, Stress, Excited, Focus, HeartRate}
+    //public enum HeartRateBar { HeartRate }
     public State currentState = State.Baseline;
     public State boostedState = State.Baseline;
 
@@ -55,10 +56,13 @@ public class CharacterChangeManager : MonoBehaviour
     // UI
     public Text currentMaxEmotion;
 
+    public Slider HeartRate;
     public Slider Focus;
     public Slider Excited;
     public Slider Relax;
     public Slider Stress;
+
+
 
     // Sprites
     private Animator anim;
@@ -75,7 +79,7 @@ public class CharacterChangeManager : MonoBehaviour
 
         anim = Player.GetComponent<Animator>();
         rand = new System.Random();
-        collectedEmotions = new int[5]; // 3~4 emotions + wildcard : Excitement, Stress, Relaxation, Focus
+        collectedEmotions = new int[5]; // 3~4 emotions + wildcard : Excitement, Stress, Relaxation, Focus, Bonus
 
         StartCoroutine(MeasureEmotion(emotions));
         StartCoroutine(CalculateEmotion());
@@ -102,7 +106,7 @@ public class CharacterChangeManager : MonoBehaviour
             anim.runtimeAnimatorController = BaselineAnim as RuntimeAnimatorController;
         }
     }
-
+     
     // Edit value multiplier here
     private double ModifyValue(double val){
    
@@ -116,8 +120,10 @@ public class CharacterChangeManager : MonoBehaviour
             yield return new WaitForSeconds(5.0f);
 
 
-            //heartBeat = (float) (50 + rand.NextDouble()* 50);
-            if (SensorId != null)
+            //heartBeat = (float) (50 + rand.NextDouble()* 50); // For testing without the device
+            heartBeat = (float) 50;
+            // Reading data from the device
+            /*if (SensorId != null)
             {
                 if (HeartRateSensor.Sensors[SensorId] != null)
                 {
@@ -128,7 +134,9 @@ public class CharacterChangeManager : MonoBehaviour
             {
                 heartBeat = 0;
                 Debug.Log("NO SIGNAL");
-            }
+            }*/
+
+
             float boostHeartBeat = heartBeat;
             Debug.Log(heartBeat);
             //emotionStream = new double[7] {rand.NextDouble(), rand.NextDouble(), rand.NextDouble(), rand.NextDouble(), rand.NextDouble(), rand.NextDouble(),rand.NextDouble()};
@@ -181,6 +189,8 @@ public class CharacterChangeManager : MonoBehaviour
                     break;
             }
 
+
+
             Debug.Log("Boost:" + boostHeartBeat);
             Debug.Log("Normal:"+ heartBeat);
             int focusRef = averageHeartBeat - 10;
@@ -191,7 +201,40 @@ public class CharacterChangeManager : MonoBehaviour
             Excited.value = (float) (100 - Mathf.Abs(boostHeartBeat - excitedRef)/50 * 100);
             Relax.value = (float) (100 - Mathf.Abs(boostHeartBeat - calmRef)/50 * 100);
             Stress.value = (float) (100 - Mathf.Abs(boostHeartBeat - stressRef)/50 * 100);
+            HeartRate.value = (float) (boostHeartBeat);
+            
+            HeartRate.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = ColorChange(boostHeartBeat);
+            //HeartRate.gameObject.transform.Find("Handle Slide Area").value = boostHeartBeat;
+            //HeartRate.gameObject.transform.Find("Handle Slide Area").Find("Handle").position = boostHeartBeat;
+
         }
+    }
+
+    // For the HeartRate bar
+    private Color ColorChange (float heartBeat)
+    {
+        Color color;
+        if (heartBeat <= 60)
+        {
+            color = Color.blue;
+        }
+        else if (heartBeat > 60 && heartBeat <= 70)
+        {
+            color = Color.grey;
+        }
+        else if (heartBeat > 70 && heartBeat <= 80)
+        {
+            color = Color.white;
+        }
+        else if  (heartBeat > 80 && heartBeat < 90)
+        {
+            color = Color.yellow;
+        }
+        else
+        {
+            color = Color.red;
+        }
+        return color;
     }
 
 
@@ -201,7 +244,7 @@ public class CharacterChangeManager : MonoBehaviour
         // Todo: Logic for deciding emotion
         // currently just mathematical max of all values
         while (true){ 
-            yield return new WaitForSeconds(5.0f); // do this every 10 seconds
+            yield return new WaitForSeconds(5.0f); // do this every 5 seconds
             
             
             double maxVal = Math.Max(Relax.value, Math.Max(Focus.value, Math.Max(Stress.value, Excited.value)));
@@ -224,6 +267,7 @@ public class CharacterChangeManager : MonoBehaviour
                 collectedEmotions[3] = AddMax(collectedEmotions[3]);
             }
         }
+
         
     }
 
