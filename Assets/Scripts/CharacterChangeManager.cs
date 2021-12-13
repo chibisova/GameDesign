@@ -63,6 +63,12 @@ public class CharacterChangeManager : MonoBehaviour
     public Slider Stress;
 
 
+    // Callibration
+    private bool calibrating = false;
+    public Text CurrentHeartValue;
+    public Text StatusText;
+    public GameObject CalibrationScreen;
+    public GameObject ReturnButton;
 
     // Sprites
     private Animator anim;
@@ -71,6 +77,10 @@ public class CharacterChangeManager : MonoBehaviour
     public AnimatorOverrideController BaselineAnim;
 
     private System.Random rand;
+
+    // Couroutines
+
+    private IEnumerator measure;
 
     void Start(){
         HeartRatePlugin.Event += OnHeartRateEvent; // HeartRate
@@ -81,7 +91,8 @@ public class CharacterChangeManager : MonoBehaviour
         rand = new System.Random();
         collectedEmotions = new int[5]; // 3~4 emotions + wildcard : Excitement, Stress, Relaxation, Focus, Bonus
 
-        StartCoroutine(MeasureEmotion(emotions));
+        measure = MeasureEmotion();
+        StartCoroutine(measure);
         StartCoroutine(CalculateEmotion());
     }
 
@@ -105,6 +116,11 @@ public class CharacterChangeManager : MonoBehaviour
         } else {
             anim.runtimeAnimatorController = BaselineAnim as RuntimeAnimatorController;
         }
+
+
+        if (Input.GetKeyDown(KeyCode.C) && !calibrating){
+            startCalibration();
+        }
     }
      
     // Edit value multiplier here
@@ -114,8 +130,47 @@ public class CharacterChangeManager : MonoBehaviour
         return val;
     }
 
+    public void startCalibration(){
+        calibrating = true;
+        CalibrationScreen.SetActive(true);
+        ReturnButton.SetActive(false);
 
-    IEnumerator MeasureEmotion(double[] emotionStream){
+        StopCoroutine(measure);
+
+        // This part isn't working for some reason
+        Player.GetComponent<PlayerController>().enabled = false;
+
+        StartCoroutine(CalibrateHeart());
+    }
+
+    public void endCalibration(){
+        calibrating = false;
+        CalibrationScreen.SetActive(false);
+
+        StartCoroutine(measure);
+
+        Player.GetComponent<PlayerController>().enabled = true;
+    }
+
+    IEnumerator CalibrateHeart(){
+        StatusText.text = "Measuring your heart rate...";
+        float currentRead = 0;
+        float allReads = 0;
+        for (int i = 0; i< 10; i++){
+            yield return new WaitForSeconds(1.0f);
+            currentRead = (float)HeartRateSensor.Sensors[SensorId].PulseRate;
+            allReads += currentRead;
+            CurrentHeartValue.text = currentRead.ToString();
+        }
+
+        averageHeartBeat = (int) allReads/10;
+        CurrentHeartValue.text = averageHeartBeat.ToString();
+        StatusText.text = "Callibration Complete!";
+
+        ReturnButton.SetActive(true);
+    }
+
+    IEnumerator MeasureEmotion(){
         while (true){
             yield return new WaitForSeconds(5.0f);
 
