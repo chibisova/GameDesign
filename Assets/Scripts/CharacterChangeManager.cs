@@ -78,9 +78,9 @@ public class CharacterChangeManager : MonoBehaviour
 
     void Start()
     {
-        HeartRatePlugin.Event += OnHeartRateEvent; // HeartRate
+        //HeartRatePlugin.Event += OnHeartRateEvent; // HeartRate
 
-        StartCoroutine(StartScanning());
+        //StartCoroutine(StartScanning());
 
         anim = Player.GetComponent<Animator>();
         rand = new System.Random();
@@ -129,7 +129,7 @@ public class CharacterChangeManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(3.0f);
 
 
             heartBeat = (float)(50 + rand.NextDouble() * 50); // For testing without the device
@@ -150,7 +150,7 @@ public class CharacterChangeManager : MonoBehaviour
 
 
             float boostHeartBeat = heartBeat;
-            Debug.Log(heartBeat);
+            //Debug.Log(heartBeat);
             //emotionStream = new double[7] {rand.NextDouble(), rand.NextDouble(), rand.NextDouble(), rand.NextDouble(), rand.NextDouble(), rand.NextDouble(),rand.NextDouble()};
 
             // prevCalm = currCalm;
@@ -212,8 +212,8 @@ public class CharacterChangeManager : MonoBehaviour
 
 
 
-            Debug.Log("Boost:" + boostHeartBeat);
-            Debug.Log("Normal:" + heartBeat);
+            //Debug.Log("Boost:" + boostHeartBeat);
+           // Debug.Log("Normal:" + heartBeat);
             int focusRef = averageHeartBeat - 10;
             int calmRef = averageHeartBeat - 25;
             int excitedRef = averageHeartBeat + 10;
@@ -274,7 +274,7 @@ public class CharacterChangeManager : MonoBehaviour
         // currently just mathematical max of all values
         while (true)
         {
-            yield return new WaitForSeconds(5.0f); // do this every 5 seconds
+            yield return new WaitForSeconds(3.0f); // do this every 5 seconds
 
 
             double maxVal = Math.Max(relaxValue, Math.Max(focusValue, Math.Max(stressValue, excitedValue)));

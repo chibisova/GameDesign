@@ -285,7 +285,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786663173}
-        m_TargetAssemblyTypeName: DoorPuzzle, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
         m_MethodName: onClickCalm
         m_Mode: 1
         m_Arguments:
@@ -43356,6 +43356,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1786663173}
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
+        m_MethodName: exitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &185318548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50749,7 +50761,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786663173}
-        m_TargetAssemblyTypeName: DoorPuzzle, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
         m_MethodName: onLoadGame
         m_Mode: 1
         m_Arguments:
@@ -51157,7 +51169,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786663173}
-        m_TargetAssemblyTypeName: DoorPuzzle, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
         m_MethodName: onClickExcited
         m_Mode: 1
         m_Arguments:
@@ -53765,6 +53777,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1525134477}
         m_TargetAssemblyTypeName: MusicController, Assembly-CSharp
         m_MethodName: ChargeFoc
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1786663173}
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
+        m_MethodName: onLoadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -56735,7 +56759,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786663173}
-        m_TargetAssemblyTypeName: DoorPuzzle, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
         m_MethodName: onClickStress
         m_Mode: 1
         m_Arguments:
@@ -58816,7 +58840,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786663173}
-        m_TargetAssemblyTypeName: DoorPuzzle, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
         m_MethodName: onClickExcited
         m_Mode: 1
         m_Arguments:
@@ -60274,7 +60298,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786663173}
-        m_TargetAssemblyTypeName: DoorPuzzle, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
         m_MethodName: onClickWildCard
         m_Mode: 1
         m_Arguments:
@@ -62252,7 +62276,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786663173}
-        m_TargetAssemblyTypeName: DoorPuzzle, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
         m_MethodName: onClickWildCard
         m_Mode: 1
         m_Arguments:
@@ -63208,7 +63232,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786663173}
-        m_TargetAssemblyTypeName: DoorPuzzle, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
         m_MethodName: onClickStress
         m_Mode: 1
         m_Arguments:
@@ -66410,7 +66434,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786663173}
-        m_TargetAssemblyTypeName: DoorPuzzle, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
         m_MethodName: exitGame
         m_Mode: 1
         m_Arguments:
@@ -77453,7 +77477,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786663173}
-        m_TargetAssemblyTypeName: DoorPuzzle, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
         m_MethodName: onClickFocus
         m_Mode: 1
         m_Arguments:
@@ -78372,6 +78396,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1786663173}
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
+        m_MethodName: onLoadGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1442035859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79078,7 +79114,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786663173}
-        m_TargetAssemblyTypeName: DoorPuzzle, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
         m_MethodName: onClickStress
         m_Mode: 1
         m_Arguments:
@@ -79691,6 +79727,7 @@ MonoBehaviour:
   AtmosphereTitleText: {fileID: 2027872057}
   currentChargeState: 0
   chargePopUp: {fileID: 1786663172}
+  chargeTime: 10
   atmTimerIsRunning: 0
   atmTimeRemaining: 0
 --- !u!1001 &1525463820
@@ -81400,7 +81437,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786663173}
-        m_TargetAssemblyTypeName: DoorPuzzle, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
         m_MethodName: onClickWildCard
         m_Mode: 1
         m_Arguments:
@@ -82939,6 +82976,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1525134477}
         m_TargetAssemblyTypeName: MusicController, Assembly-CSharp
         m_MethodName: ChargeStr
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1786663173}
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
+        m_MethodName: onLoadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -85303,7 +85352,7 @@ GameObject:
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1786663173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85313,7 +85362,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1786663172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0deeb7ceb8ed94527b5a40093f639fdf, type: 3}
+  m_Script: {fileID: 11500000, guid: 2005a875362dada48b62d8e47e7d16be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   answerlist: []
@@ -85321,7 +85370,6 @@ MonoBehaviour:
   emotionsRemaining: 
   Level: {fileID: 1525134472}
   Player: {fileID: 1671588487}
-  Door: {fileID: 0}
   calmColor:
     serializedVersion: 2
     rgba: 4294949689
@@ -85549,7 +85597,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786663173}
-        m_TargetAssemblyTypeName: DoorPuzzle, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
         m_MethodName: onClickCalm
         m_Mode: 1
         m_Arguments:
@@ -85966,7 +86014,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786663173}
-        m_TargetAssemblyTypeName: DoorPuzzle, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
         m_MethodName: onClickFocus
         m_Mode: 1
         m_Arguments:
@@ -87249,7 +87297,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786663173}
-        m_TargetAssemblyTypeName: DoorPuzzle, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
         m_MethodName: onClickCalm
         m_Mode: 1
         m_Arguments:
@@ -87637,7 +87685,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786663173}
-        m_TargetAssemblyTypeName: DoorPuzzle, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
         m_MethodName: onClickFocus
         m_Mode: 1
         m_Arguments:
@@ -87848,7 +87896,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786663173}
-        m_TargetAssemblyTypeName: DoorPuzzle, Assembly-CSharp
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
         m_MethodName: onClickExcited
         m_Mode: 1
         m_Arguments:
@@ -94030,6 +94078,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1525134477}
         m_TargetAssemblyTypeName: MusicController, Assembly-CSharp
         m_MethodName: ChargeExc
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1786663173}
+        m_TargetAssemblyTypeName: ChargingAtmos, Assembly-CSharp
+        m_MethodName: onLoadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

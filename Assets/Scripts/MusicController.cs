@@ -24,6 +24,7 @@ public class MusicController : MonoBehaviour
     //public enum HeartRateBar { HeartRate }
     public ChargeState currentChargeState;
     public GameObject chargePopUp;
+    public float chargeTime = 10.0f;
     public bool atmTimerIsRunning = false;
     public float atmTimeRemaining = 0;
     private float calTimeRemaining = 0;
@@ -39,10 +40,12 @@ public class MusicController : MonoBehaviour
     {
         Character = Player.GetComponent<CharacterChangeManager>();
         playBase();
-        calTimeRemaining = (float) 120.0;
-        excTimeRemaining = (float) 120.0;
-        focTimeRemaining = (float) 120.0;
-        strTimeRemaining = (float) 120.0;
+        calTimeRemaining = chargeTime;
+        excTimeRemaining = chargeTime;
+        focTimeRemaining = chargeTime;
+        strTimeRemaining = chargeTime;
+        Debug.Log("Start is called");
+        chargePopUp.SetActive(false);
     }
 
     // Update is called once per frame
@@ -57,9 +60,11 @@ public class MusicController : MonoBehaviour
             else
             {
                 Debug.Log("Time has run out!");
-                Character.boostedState = CharacterChangeManager.State.Baseline;
                 atmTimeRemaining = 0;
+                StopAtmTimer();
+                playBase();
                 atmTimerIsRunning = false;
+                Debug.Log("Should play Base now");
             }
         }       
     }
@@ -78,6 +83,8 @@ public class MusicController : MonoBehaviour
 
     public void playCalm(){
         if(calTimeRemaining > 0){
+            StopAtmTimer();
+            Debug.Log("Calm Time remaining: " + calTimeRemaining);
             source.clip = calm;
             Character.boostedState = CharacterChangeManager.State.Calm;
             source.Play();
@@ -96,16 +103,20 @@ public class MusicController : MonoBehaviour
     }
 
     public void playExcited(){
-        if(calTimeRemaining > 0){
-        source.clip = excited;
-        Character.boostedState = CharacterChangeManager.State.Excited;
-        source.Play();
-        Fog.GetComponent<SpriteRenderer>().color = new Color32(255, 245, 102, 255);
-        AtmosphereTitleText.text = "Excited";
-        AtmosphereTitle.GetComponent<UnityEngine.UI.Text>().color= new Color32(255, 245, 102, 255);
-        CalmParticles.SetActive(false);
-        ExcitedParticles.SetActive(true);
-        StressParticles.SetActive(false);
+        if(excTimeRemaining > 0){
+            StopAtmTimer();
+            Debug.Log("Excited Time remaining: " + excTimeRemaining);
+            source.clip = excited;
+            Character.boostedState = CharacterChangeManager.State.Excited;
+            source.Play();
+            Fog.GetComponent<SpriteRenderer>().color = new Color32(255, 245, 102, 255);
+            AtmosphereTitleText.text = "Excited";
+            AtmosphereTitle.GetComponent<UnityEngine.UI.Text>().color= new Color32(255, 245, 102, 255);
+            CalmParticles.SetActive(false);
+            ExcitedParticles.SetActive(true);
+            StressParticles.SetActive(false);
+            atmTimeRemaining = excTimeRemaining;
+            atmTimerIsRunning = true;  
         }
         else{
             Debug.Log("Not enough charge!");
@@ -114,15 +125,19 @@ public class MusicController : MonoBehaviour
 
     public void playStress(){
         if(strTimeRemaining > 0){
-        source.clip = stress;
-        Character.boostedState = CharacterChangeManager.State.Stress; 
-        source.Play();
-        Fog.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 0, 255);
-        AtmosphereTitleText.text = "Stressed";
-        AtmosphereTitle.GetComponent<UnityEngine.UI.Text>().color= new Color32(255, 0, 0, 255);
-        CalmParticles.SetActive(false);
-        ExcitedParticles.SetActive(false);
-        StressParticles.SetActive(true);
+            StopAtmTimer();
+            Debug.Log("StressTime remaining: " + strTimeRemaining);
+            source.clip = stress;
+            Character.boostedState = CharacterChangeManager.State.Stress; 
+            source.Play();
+            Fog.GetComponent<SpriteRenderer>().color = new Color32(255, 0, 0, 255);
+            AtmosphereTitleText.text = "Stressed";
+            AtmosphereTitle.GetComponent<UnityEngine.UI.Text>().color= new Color32(255, 0, 0, 255);
+            CalmParticles.SetActive(false);
+            ExcitedParticles.SetActive(false);
+            StressParticles.SetActive(true);
+            atmTimeRemaining = strTimeRemaining;
+            atmTimerIsRunning = true;  
         }
         else{
             Debug.Log("Not enough charge!");
@@ -131,24 +146,25 @@ public class MusicController : MonoBehaviour
 
     public void playFocus(){
         if(focTimeRemaining > 0){
-        source.clip = focus;
-        Character.boostedState = CharacterChangeManager.State.Focus;
-        source.Play();
-        Fog.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 150);
-        AtmosphereTitleText.text = "Focused";
-        AtmosphereTitle.GetComponent<UnityEngine.UI.Text>().color= new Color32(255, 255, 255, 150);
-        CalmParticles.SetActive(false);
-        ExcitedParticles.SetActive(false);
-        StressParticles.SetActive(false);
+            StopAtmTimer();
+            Debug.Log("Focus Time remaining: " + focTimeRemaining);
+            source.clip = focus;
+            Character.boostedState = CharacterChangeManager.State.Focus;
+            source.Play();
+            Fog.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 150);
+            AtmosphereTitleText.text = "Focused";
+            AtmosphereTitle.GetComponent<UnityEngine.UI.Text>().color= new Color32(255, 255, 255, 150);
+            CalmParticles.SetActive(false);
+            ExcitedParticles.SetActive(false);
+            StressParticles.SetActive(false);
+            atmTimeRemaining = focTimeRemaining;
+            atmTimerIsRunning = true;  
         }
         else{
             Debug.Log("Not enough charge!");
         }
     }
 
-    public void StartAtmTimer(){
-        atmTimerIsRunning = true;
-    }
     public void StopAtmTimer(){
         atmTimerIsRunning = false;
         switch(Character.boostedState){
@@ -165,7 +181,14 @@ public class MusicController : MonoBehaviour
                 strTimeRemaining = atmTimeRemaining;
             break;
         }
-        playBase();
+        //playBase();
+    }
+    public void PauseTimer(){
+        atmTimerIsRunning = false;
+    }
+
+    public void ContinueTimer(){
+        atmTimerIsRunning = true;
     }
 
     public void ChargeCal(){
@@ -187,19 +210,21 @@ public class MusicController : MonoBehaviour
         chargePopUp.SetActive(true);
     }
     public void Charge(){
-        int amount = chargePopUp.GetComponent<DoorPuzzle>().Answers.Length;
+        //int amount = chargePopUp.GetComponent<ChargingAtmos>().Answers.Length;
+        int amount = chargePopUp.GetComponent<ChargingAtmos>().currPos;
+        Debug.Log(amount);
          switch(currentChargeState){
             case ChargeState.Calm:
-                calTimeRemaining += (float) 120.0 * amount;
+                calTimeRemaining += (float) chargeTime * amount;
                 break;
             case ChargeState.Focus:
-                focTimeRemaining += (float) 120.0 * amount;
+                focTimeRemaining += (float) chargeTime * amount;
                 break;
             case ChargeState.Excited:
-                excTimeRemaining += (float) 120.0 * amount;
+                excTimeRemaining += (float) chargeTime * amount;
                 break;
             case ChargeState.Stress:
-                strTimeRemaining += (float) 120.0 * amount;
+                strTimeRemaining += (float) chargeTime * amount;
                 break;
         }
     }

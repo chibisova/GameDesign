@@ -117,10 +117,11 @@ public class LevelManager : MonoBehaviour
 
     public void SetAtmosActive(){
         selectActive = true;
-        gameObject.GetComponent<MusicController>().StopAtmTimer();
+        gameObject.GetComponent<MusicController>().PauseTimer();
     }
     public void SetAtmosInActive(){
         selectActive = false;
+        gameObject.GetComponent<MusicController>().ContinueTimer();
     }
 
 }
