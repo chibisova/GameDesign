@@ -115,6 +115,11 @@ public class LevelManager : MonoBehaviour
         gamePaused = false;
     }
 
+    public void CancelForce()
+    {
+        forceChange = false;
+    }
+
     public void SetAtmosActive(){
         selectActive = true;
         gameObject.GetComponent<MusicController>().PauseTimer();

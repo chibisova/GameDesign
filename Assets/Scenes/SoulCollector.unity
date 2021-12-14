@@ -944,7 +944,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 36501918}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -20723,7 +20723,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Change
 --- !u!222 &154633347
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -50469,7 +50469,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 312622138}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -51894,7 +51894,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 363946408}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -53340,7 +53340,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 492827185}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1967398442}
+        m_TargetAssemblyTypeName: ForceChange, Assembly-CSharp
+        m_MethodName: onClickCalm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &492827185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55200,7 +55212,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 569985969}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -55294,7 +55306,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Stress
 --- !u!222 &578332968
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -57075,7 +57087,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 685837072}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1967398442}
+        m_TargetAssemblyTypeName: ForceChange, Assembly-CSharp
+        m_MethodName: onClickExcited
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &685837072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58909,7 +58933,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846318353}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -61369,7 +61393,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 10
   m_WholeNumbers: 1
-  m_Value: 0
+  m_Value: 9
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -61871,7 +61895,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 10
   m_WholeNumbers: 1
-  m_Value: 0
+  m_Value: 9
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -61945,7 +61969,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Excited
 --- !u!222 &1026064149
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -63755,7 +63779,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Cancel
 --- !u!222 &1144625857
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -63928,7 +63952,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1148061468}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1525134473}
+        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+        m_MethodName: CancelForce
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1148061468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64202,7 +64238,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 10
   m_WholeNumbers: 1
-  m_Value: 0
+  m_Value: 9
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -79079,7 +79115,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 10
   m_WholeNumbers: 1
-  m_Value: 0
+  m_Value: 9
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -80037,6 +80073,7 @@ MonoBehaviour:
   excitedValue: 0
   relaxValue: 0
   stressValue: 0
+  ForceChange: {fileID: 1967398441}
   CalmAnim: {fileID: 22100000, guid: 7eec27c9d44184640b64e11b81594b32, type: 2}
   ExcitedAnim: {fileID: 22100000, guid: 9c6d0dbd67c234271a6d205342719db6, type: 2}
   BaselineAnim: {fileID: 22100000, guid: a75908819e4dd4f2690ed9c8706e3d82, type: 2}
@@ -83287,7 +83324,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655980732}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -87336,7 +87373,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1870063781}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1870063781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88276,7 +88325,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Calm
 --- !u!222 &1940335222
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -93484,6 +93533,9 @@ MonoBehaviour:
   CalmAnim: {fileID: 22100000, guid: 7eec27c9d44184640b64e11b81594b32, type: 2}
   ExcitedAnim: {fileID: 22100000, guid: 9c6d0dbd67c234271a6d205342719db6, type: 2}
   BaselineAnim: {fileID: 22100000, guid: a75908819e4dd4f2690ed9c8706e3d82, type: 2}
+  forceActive: 0
+  timeRemaining: 30
+  timerIsRunning: 0
 --- !u!114 &1967398443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95069,7 +95121,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Focus
 --- !u!222 &2059039902
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -95643,7 +95695,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2085265149}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1525134473}
+        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+        m_MethodName: CancelForce
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2085265149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95843,7 +95907,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2096999449}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2096999449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96430,6 +96506,7 @@ MonoBehaviour:
   excitedValue: 0
   relaxValue: 0
   stressValue: 0
+  ForceChange: {fileID: 0}
   CalmAnim: {fileID: 22100000, guid: 7eec27c9d44184640b64e11b81594b32, type: 2}
   ExcitedAnim: {fileID: 22100000, guid: 9c6d0dbd67c234271a6d205342719db6, type: 2}
   BaselineAnim: {fileID: 22100000, guid: a75908819e4dd4f2690ed9c8706e3d82, type: 2}

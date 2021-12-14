@@ -67,6 +67,7 @@ public class CharacterChangeManager : MonoBehaviour
     public float relaxValue;
     public float stressValue;
 
+    public GameObject ForceChange;
 
     // Sprites
     private Animator anim;
@@ -102,17 +103,37 @@ public class CharacterChangeManager : MonoBehaviour
     void Update()
     {
 
-        if (currentState == State.Calm)
+        if (!(ForceChange.GetComponent<ForceChange>().forceActive))
         {
-            anim.runtimeAnimatorController = CalmAnim as RuntimeAnimatorController;
-        }
-        else if (currentState == State.Excited)
+            if (currentState == State.Calm)
+            {
+                anim.runtimeAnimatorController = CalmAnim as RuntimeAnimatorController;
+            }
+            else if (currentState == State.Excited)
+            {
+                anim.runtimeAnimatorController = ExcitedAnim as RuntimeAnimatorController;
+            }
+            else
+            {
+                anim.runtimeAnimatorController = BaselineAnim as RuntimeAnimatorController;
+            }
+        } else
         {
-            anim.runtimeAnimatorController = ExcitedAnim as RuntimeAnimatorController;
-        }
-        else
-        {
-            anim.runtimeAnimatorController = BaselineAnim as RuntimeAnimatorController;
+            if (ForceChange.GetComponent<ForceChange>().timerIsRunning)
+            {
+                if (ForceChange.GetComponent<ForceChange>().timeRemaining > 0)
+                {
+                    ForceChange.GetComponent<ForceChange>().timeRemaining -= Time.deltaTime;
+                    //Debug.Log("Time: " + ForceChange.GetComponent<ForceChange>().timeRemaining);
+                }
+                else
+                {
+                    Debug.Log("Time has run out!");
+                    ForceChange.GetComponent<ForceChange>().timeRemaining = 30;
+                    ForceChange.GetComponent<ForceChange>().timerIsRunning = false;
+                    ForceChange.GetComponent<ForceChange>().forceActive = false;
+                }
+            }
         }
     }
 
