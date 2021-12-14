@@ -27,6 +27,8 @@ public class LevelManager : MonoBehaviour
     private bool selectActive = false;
     public GameObject SelectMenu;
 
+    private bool forceChange = false;
+    public GameObject ForceChange;
 
     void Start()
     {
@@ -55,6 +57,11 @@ public class LevelManager : MonoBehaviour
             selectActive = !selectActive;
         }
 
+        if (Input.GetKeyDown(KeyCode.F) && !forceChange)
+        {
+            forceChange = !forceChange;
+        }
+
         if (gamePaused){
             Player.GetComponent<PlayerController>().enabled= false;
             PauseMenu.SetActive(true);
@@ -69,6 +76,18 @@ public class LevelManager : MonoBehaviour
         } else {
             Player.GetComponent<PlayerController>().enabled= true;
             SelectMenu.SetActive(false);
+        }
+
+
+        if (forceChange)
+        {
+            Player.GetComponent<PlayerController>().enabled = false;
+            ForceChange.SetActive(true);
+        }
+        else
+        {
+            Player.GetComponent<PlayerController>().enabled = true;
+            ForceChange.SetActive(false);
         }
     }
 
