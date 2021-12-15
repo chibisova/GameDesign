@@ -74,7 +74,7 @@ public class CharacterChangeManager : MonoBehaviour
     public GameObject CalibrationScreen;
     public GameObject ReturnButton;
 
-    
+
     public GameObject ForceChange;
 
     // Sprites
@@ -118,16 +118,19 @@ public class CharacterChangeManager : MonoBehaviour
 
         if (!(ForceChange.GetComponent<ForceChange>().forceActive)) // Check if not Forced
         {
-            if (currentState == State.Calm)
-            {
+            if (currentState == State.Calm) {
                 anim.runtimeAnimatorController = CalmAnim as RuntimeAnimatorController;
-            }
-            else if (currentState == State.Excited)
-            {
+                Player.GetComponent<SpriteRenderer>().color = Color.white;
+            } else if (currentState == State.Excited) {
                 anim.runtimeAnimatorController = ExcitedAnim as RuntimeAnimatorController;
-            }
-            else
-            {
+                Player.GetComponent<SpriteRenderer>().color = Color.white;
+            } else if (currentState == State.Stress){
+                anim.runtimeAnimatorController = ExcitedAnim as RuntimeAnimatorController;
+                Player.GetComponent<SpriteRenderer>().color = Color.red;
+            } else if (currentState == State.Calm){ 
+                anim.runtimeAnimatorController = CalmAnim as RuntimeAnimatorController;
+                Player.GetComponent<SpriteRenderer>().color = Color.grey;
+            }else {
                 anim.runtimeAnimatorController = BaselineAnim as RuntimeAnimatorController;
             }
         } else //Start Timer

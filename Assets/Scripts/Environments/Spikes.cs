@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Spikes : MonoBehaviour
 {
+
+    public GameObject Level;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +20,7 @@ public class Spikes : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {   
-        if (collision.gameObject.tag.Equals("Player"))
+        if (collision.gameObject.tag.Equals("Player") && (Level.GetComponent<CharacterChangeManager>().currentState != CharacterChangeManager.State.Focus))
             collision.gameObject.GetComponent<PlayerController>().dead = true;
     }
 }

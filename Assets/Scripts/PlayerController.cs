@@ -76,8 +76,14 @@ public class PlayerController : MonoBehaviour
     
         //ChangeMode();
 
-        if (Input.GetKeyDown(KeyCode.Q)){
+        // if (Input.GetKeyDown(KeyCode.Q)){
 
+        // }
+
+        if (Level.GetComponent<CharacterChangeManager>().currentState == CharacterChangeManager.State.Stress){
+            moveSpeed = 9.0f;
+        } else{
+            moveSpeed = 7.0f;
         }
     }
 
