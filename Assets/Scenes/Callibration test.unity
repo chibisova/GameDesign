@@ -56028,6 +56028,7 @@ MonoBehaviour:
   Player: {fileID: 2097396900}
   PauseMenu: {fileID: 400470624}
   SelectMenu: {fileID: 1018202408}
+  ForceChange: {fileID: 0}
 --- !u!114 &1610104877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56053,6 +56054,16 @@ MonoBehaviour:
   StressParticles: {fileID: 715932402}
   AtmosphereTitle: {fileID: 1274831304}
   AtmosphereTitleText: {fileID: 1274831305}
+  excitedTimeText: {fileID: 0}
+  focusTimeText: {fileID: 0}
+  stressTimeText: {fileID: 0}
+  relaxedTimeText: {fileID: 0}
+  currentChargeState: 0
+  chargePopUp: {fileID: 0}
+  notEnoughPopup: {fileID: 0}
+  chargeTime: 10
+  atmTimerIsRunning: 0
+  atmTimeRemaining: 0
 --- !u!114 &1610104878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56077,10 +56088,15 @@ MonoBehaviour:
   Excited: {fileID: 1116976601}
   Relax: {fileID: 1573401540}
   Stress: {fileID: 640969298}
+  focusValue: 0
+  excitedValue: 0
+  relaxValue: 0
+  stressValue: 0
   CurrentHeartValue: {fileID: 1087452703}
   StatusText: {fileID: 812174940}
   CalibrationScreen: {fileID: 393601105}
   ReturnButton: {fileID: 1971873838}
+  ForceChange: {fileID: 720950552}
   CalmAnim: {fileID: 22100000, guid: 7eec27c9d44184640b64e11b81594b32, type: 2}
   ExcitedAnim: {fileID: 22100000, guid: 9c6d0dbd67c234271a6d205342719db6, type: 2}
   BaselineAnim: {fileID: 22100000, guid: a75908819e4dd4f2690ed9c8706e3d82, type: 2}
@@ -68121,10 +68137,15 @@ MonoBehaviour:
   Excited: {fileID: 1116976601}
   Relax: {fileID: 1573401540}
   Stress: {fileID: 640969298}
+  focusValue: 0
+  excitedValue: 0
+  relaxValue: 0
+  stressValue: 0
   CurrentHeartValue: {fileID: 0}
   StatusText: {fileID: 0}
   CalibrationScreen: {fileID: 0}
   ReturnButton: {fileID: 0}
+  ForceChange: {fileID: 0}
   CalmAnim: {fileID: 22100000, guid: 7eec27c9d44184640b64e11b81594b32, type: 2}
   ExcitedAnim: {fileID: 22100000, guid: 9c6d0dbd67c234271a6d205342719db6, type: 2}
   BaselineAnim: {fileID: 22100000, guid: a75908819e4dd4f2690ed9c8706e3d82, type: 2}
