@@ -139,11 +139,11 @@ public class CharacterChangeManager : MonoBehaviour
                     ForceChange.GetComponent<ForceChange>().timeRemaining -= Time.deltaTime;
                     if (ForceChange.GetComponent<ForceChange>().forcedCalm)
                     {
-                        Relax.gameObject.transform.Find("Relax Timer").Find("Image").GetComponent<Image>().fillAmount = (ForceChange.GetComponent<ForceChange>().timeRemaining / 15);
+                        Relax.gameObject.transform.Find("Relax Timer").Find("Image").GetComponent<Image>().fillAmount = (ForceChange.GetComponent<ForceChange>().timeRemaining / 30);
 
                     } else if (ForceChange.GetComponent<ForceChange>().forcedExcited)
                     {
-                        Excited.gameObject.transform.Find("Excited Timer").Find("Image").GetComponent<Image>().fillAmount = (ForceChange.GetComponent<ForceChange>().timeRemaining / 15);
+                        Excited.gameObject.transform.Find("Excited Timer").Find("Image").GetComponent<Image>().fillAmount = (ForceChange.GetComponent<ForceChange>().timeRemaining / 30);
 
                     }
                     //ForceChange.GetComponent<ForceChange>().fillTimer.fillAmont = ForceChange.GetComponent<ForceChange>().timeRemaining / ForceChange.GetComponent<ForceChange>().timeRemaining;
@@ -152,13 +152,11 @@ public class CharacterChangeManager : MonoBehaviour
                 else
                 {
                     Debug.Log("Time has run out!");
-                    ForceChange.GetComponent<ForceChange>().timeRemaining = 15;
+                    ForceChange.GetComponent<ForceChange>().timeRemaining = 30;
                     ForceChange.GetComponent<ForceChange>().timerIsRunning = false;
                     ForceChange.GetComponent<ForceChange>().forceActive = false;
                     ForceChange.GetComponent<ForceChange>().forcedCalm = false;
                     ForceChange.GetComponent<ForceChange>().forcedExcited = false;
-                    ForceChange.GetComponent<ForceChange>().calmButton.GetComponent<Button>().interactable = true;
-                    ForceChange.GetComponent<ForceChange>().excitedButton.GetComponent<Button>().interactable = true;
 
                 }
             }
@@ -376,11 +374,30 @@ public class CharacterChangeManager : MonoBehaviour
             {
                 yield return 0;
             }
-            if ((ForceChange.GetComponent<ForceChange>().forceActive))
+            if (ForceChange.GetComponent<ForceChange>().forceActive)
             {
-                if (maxVal == excitedValue || (ForceChange.GetComponent<ForceChange>().forcedExcited))
+                if ((ForceChange.GetComponent<ForceChange>().forcedExcited))
                 {
                     currentState = State.Excited;
+                }
+                else if (ForceChange.GetComponent<ForceChange>().forcedCalm)
+                {
+                    currentState = State.Calm;
+                }
+                if (maxVal == focusValue)
+                {
+                    if (Focus.value < 10)
+                    {
+                        Focus.value += 1;
+                    }
+                    else if (Focus.value == 10)
+                    {
+                        collectedEmotions[0] = AddMax(collectedEmotions[0]);
+                        Focus.value = 0;
+                    }
+                }
+                else if (maxVal == excitedValue)
+                {
                     if (Excited.value < 10)
                     {
                         Excited.value += 1;
@@ -391,9 +408,21 @@ public class CharacterChangeManager : MonoBehaviour
                         Excited.value = 0;
                     }
                 }
-                else if (maxVal == relaxValue || (ForceChange.GetComponent<ForceChange>().forcedCalm))
+                else if (maxVal == stressValue)
                 {
-                    currentState = State.Calm;
+                    if (Stress.value < 10)
+                    {
+                        Stress.value += 1;
+                    }
+                    else if (Stress.value == 10)
+                    {
+                        collectedEmotions[2] = AddMax(collectedEmotions[2]);
+                        Stress.value = 0;
+                    }
+
+                }
+                else if (maxVal == relaxValue)
+                {
                     if (Relax.value < 10)
                     {
                         Relax.value += 1;
@@ -408,7 +437,6 @@ public class CharacterChangeManager : MonoBehaviour
             else { 
                 if (maxVal == focusValue)
                 {
-                    Debug.Log("Focus");
                     currentState = State.Focus;
                     if (Focus.value < 10)
                     {
@@ -416,7 +444,6 @@ public class CharacterChangeManager : MonoBehaviour
                     }
                     else if (Focus.value == 10)
                     {
-
                         collectedEmotions[0] = AddMax(collectedEmotions[0]);
                         Focus.value = 0;
                     }
@@ -459,7 +486,6 @@ public class CharacterChangeManager : MonoBehaviour
                     {
                         collectedEmotions[3] = AddMax(collectedEmotions[3]);
                         Relax.value = 0;
-
                     }
                 }
             }

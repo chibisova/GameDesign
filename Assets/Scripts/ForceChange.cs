@@ -22,7 +22,7 @@ public class ForceChange : MonoBehaviour
     public bool forcedExcited = false;
     public Image fillTimer;
 
-    public float timeRemaining = 15;
+    public float timeRemaining = 30;
     public bool timerIsRunning = false;
 
     public string[] currAnswer;
