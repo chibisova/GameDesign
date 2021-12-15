@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 45e18f79dff194234b9332028cbdf663
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 272b4678dfcf94118b129fa009dd2b09
+  - enabled: 1
+    path: Assets/Scenes/SoulCollector.unity
+    guid: d5ebc511f827e47dd80ceea5f1604ba7
   m_configObjects: {}
