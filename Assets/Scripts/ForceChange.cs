@@ -18,20 +18,36 @@ public class ForceChange : MonoBehaviour
     public AnimatorOverrideController BaselineAnim;
 
     public bool forceActive = false;
+    public bool forcedCalm = false;
+    public bool forcedExcited = false;
+    public Image fillTimer;
 
-    public float timeRemaining = 30;
+    public float timeRemaining = 15;
     public bool timerIsRunning = false;
-
 
     public string[] currAnswer;
     public int currPos = 0;
+
+    public Button calmButton;
+    public Button excitedButton;
+    public Button stressButton;
+    public Button focusButton;
+
 
     public GameObject MainUIController;
 
     // Update is called once per frame
     void Update()
     {
+        if (Character.GetComponent<CharacterChangeManager>().collectedEmotions[3] > 0 && !timerIsRunning)
+        {
+            calmButton.GetComponent<Button>().interactable = true;
 
+        }
+        if (Character.GetComponent<CharacterChangeManager>().collectedEmotions[1] > 0 && !timerIsRunning)
+        {
+            excitedButton.GetComponent<Button>().interactable = true;
+        }
     }
 
 
@@ -39,8 +55,12 @@ public class ForceChange : MonoBehaviour
     void Start()
     {
         anim = Player.GetComponent<Animator>();
-
+        fillTimer.fillAmount = 1f;
         emotionSetup = Character.GetComponent<CharacterChangeManager>().collectedEmotions;
+        focusButton.GetComponent<Button>().interactable = false;
+        stressButton.GetComponent<Button>().interactable = false;
+        calmButton.GetComponent<Button>().interactable = false;
+        excitedButton.GetComponent<Button>().interactable = false;
     }
 
     public void onClickCalm()
@@ -49,12 +69,17 @@ public class ForceChange : MonoBehaviour
         {
             anim.runtimeAnimatorController = CalmAnim as RuntimeAnimatorController;
             MainUIController.GetComponent<UIController>().slots[3].transform.GetChild(Character.GetComponent<CharacterChangeManager>().collectedEmotions[3]).gameObject.SetActive(false);
-            //Debug.Log("UI change: " + MainUIController.GetComponent<UIController>().slots[3].transform.GetChild(Character.GetComponent<CharacterChangeManager>().collectedEmotions[0]-1));
             Character.GetComponent<CharacterChangeManager>().collectedEmotions[3] -= 1;
-            forceIsActive();
-            //Debug.Log("Check: " + MainUIController.GetComponent<UIController>().slots[3].transform.GetChild(Character.GetComponent<CharacterChangeManager>().collectedEmotions[3]));
+
             timerIsRunning = true;
+            forcedCalm = true;
+            forceActive = true;
+            calmButton.GetComponent<Button>().interactable = false;
+            excitedButton.GetComponent<Button>().interactable = false;
             //renderCanvas();
+        } else
+        {
+            calmButton.GetComponent<Button>().interactable = false;
         }
     }
 
@@ -64,13 +89,17 @@ public class ForceChange : MonoBehaviour
         {
             anim.runtimeAnimatorController = ExcitedAnim as RuntimeAnimatorController;
             MainUIController.GetComponent<UIController>().slots[1].transform.GetChild(Character.GetComponent<CharacterChangeManager>().collectedEmotions[1]).gameObject.SetActive(false);
-            //Debug.Log("UI change: " + MainUIController.GetComponent<UIController>().slots[1].transform.GetChild(Character.GetComponent<CharacterChangeManager>().collectedEmotions[2]-1));
-
             Character.GetComponent<CharacterChangeManager>().collectedEmotions[1] -= 1;
-            forceIsActive();
-            //Debug.Log("Check 2: " + Character.GetComponent<CharacterChangeManager>().collectedEmotions[1]);
+
             timerIsRunning = true;
+            forcedExcited = true;
+            forceActive = true;
+            calmButton.GetComponent<Button>().interactable = false;
+            excitedButton.GetComponent<Button>().interactable = false;
             //renderCanvas();
+        } else
+        {
+            excitedButton.GetComponent<Button>().interactable = false;
         }
 
     }
@@ -87,11 +116,6 @@ public class ForceChange : MonoBehaviour
 
     }
 
-    public void forceIsActive()
-    {
-        forceActive = true;
-
-    }
     /*
     public void renderCanvas()
     {

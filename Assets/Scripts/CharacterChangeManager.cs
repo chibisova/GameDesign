@@ -116,7 +116,7 @@ public class CharacterChangeManager : MonoBehaviour
     void Update()
     {
 
-        if (!(ForceChange.GetComponent<ForceChange>().forceActive))
+        if (!(ForceChange.GetComponent<ForceChange>().forceActive)) // Check if not Forced
         {
             if (currentState == State.Calm)
             {
@@ -130,21 +130,36 @@ public class CharacterChangeManager : MonoBehaviour
             {
                 anim.runtimeAnimatorController = BaselineAnim as RuntimeAnimatorController;
             }
-        } else
+        } else //Start Timer
         {
             if (ForceChange.GetComponent<ForceChange>().timerIsRunning)
             {
                 if (ForceChange.GetComponent<ForceChange>().timeRemaining > 0)
                 {
                     ForceChange.GetComponent<ForceChange>().timeRemaining -= Time.deltaTime;
+                    if (ForceChange.GetComponent<ForceChange>().forcedCalm)
+                    {
+                        Relax.gameObject.transform.Find("Relax Timer").Find("Image").GetComponent<Image>().fillAmount = (ForceChange.GetComponent<ForceChange>().timeRemaining / 15);
+
+                    } else if (ForceChange.GetComponent<ForceChange>().forcedExcited)
+                    {
+                        Excited.gameObject.transform.Find("Excited Timer").Find("Image").GetComponent<Image>().fillAmount = (ForceChange.GetComponent<ForceChange>().timeRemaining / 15);
+
+                    }
+                    //ForceChange.GetComponent<ForceChange>().fillTimer.fillAmont = ForceChange.GetComponent<ForceChange>().timeRemaining / ForceChange.GetComponent<ForceChange>().timeRemaining;
                     //Debug.Log("Time: " + ForceChange.GetComponent<ForceChange>().timeRemaining);
                 }
                 else
                 {
                     Debug.Log("Time has run out!");
-                    ForceChange.GetComponent<ForceChange>().timeRemaining = 30;
+                    ForceChange.GetComponent<ForceChange>().timeRemaining = 15;
                     ForceChange.GetComponent<ForceChange>().timerIsRunning = false;
                     ForceChange.GetComponent<ForceChange>().forceActive = false;
+                    ForceChange.GetComponent<ForceChange>().forcedCalm = false;
+                    ForceChange.GetComponent<ForceChange>().forcedExcited = false;
+                    ForceChange.GetComponent<ForceChange>().calmButton.GetComponent<Button>().interactable = true;
+                    ForceChange.GetComponent<ForceChange>().excitedButton.GetComponent<Button>().interactable = true;
+
                 }
             }
         }
@@ -361,59 +376,91 @@ public class CharacterChangeManager : MonoBehaviour
             {
                 yield return 0;
             }
+            if ((ForceChange.GetComponent<ForceChange>().forceActive))
+            {
+                if (maxVal == excitedValue || (ForceChange.GetComponent<ForceChange>().forcedExcited))
+                {
+                    currentState = State.Excited;
+                    if (Excited.value < 10)
+                    {
+                        Excited.value += 1;
+                    }
+                    else if (Excited.value == 10)
+                    {
+                        collectedEmotions[1] = AddMax(collectedEmotions[1]);
+                        Excited.value = 0;
+                    }
+                }
+                else if (maxVal == relaxValue || (ForceChange.GetComponent<ForceChange>().forcedCalm))
+                {
+                    currentState = State.Calm;
+                    if (Relax.value < 10)
+                    {
+                        Relax.value += 1;
+                    }
+                    else if (Relax.value == 10)
+                    {
+                        collectedEmotions[3] = AddMax(collectedEmotions[3]);
+                        Relax.value = 0;
+                    }
+                }
+            }
+            else { 
+                if (maxVal == focusValue)
+                {
+                    Debug.Log("Focus");
+                    currentState = State.Focus;
+                    if (Focus.value < 10)
+                    {
+                        Focus.value += 1;
+                    }
+                    else if (Focus.value == 10)
+                    {
 
-            if (maxVal == focusValue)
-            {
-                Debug.Log("Focus");
-                currentState = State.Focus;
-                if (Focus.value < 10)
-                {
-                    Focus.value += 1;
+                        collectedEmotions[0] = AddMax(collectedEmotions[0]);
+                        Focus.value = 0;
+                    }
                 }
-                else if (Focus.value == 10)
+                else if (maxVal == excitedValue)
                 {
-                    collectedEmotions[0] = AddMax(collectedEmotions[0]);
-                    Focus.value = 0;
+                    currentState = State.Excited;
+                    if (Excited.value < 10)
+                    {
+                        Excited.value += 1;
+                    }
+                    else if (Excited.value == 10)
+                    {
+                        collectedEmotions[1] = AddMax(collectedEmotions[1]);
+                        Excited.value = 0;
+                    }
                 }
-            }
-            else if (maxVal == excitedValue)
-            {
-                currentState = State.Excited;
-                if (Excited.value < 10)
+                else if (maxVal == stressValue)
                 {
-                    Excited.value += 1;
-                }
-                else if (Excited.value == 10)
-                {
-                    collectedEmotions[1] = AddMax(collectedEmotions[1]);
-                    Excited.value = 0;
-                }
-            }
-            else if (maxVal == stressValue)
-            {
-                currentState = State.Stress;
-                if (Stress.value < 10)
-                {
-                    Stress.value += 1;
-                }
-                else if (Stress.value == 10)
-                {
-                    collectedEmotions[2] = AddMax(collectedEmotions[2]);
-                    Stress.value = 0;
-                }
+                    currentState = State.Stress;
+                    if (Stress.value < 10)
+                    {
+                        Stress.value += 1;
+                    }
+                    else if (Stress.value == 10)
+                    {
+                        collectedEmotions[2] = AddMax(collectedEmotions[2]);
+                        Stress.value = 0;
+                    }
 
-            }
-            else if (maxVal == relaxValue)
-            {
-                currentState = State.Calm;
-                if (Relax.value < 10)
-                {
-                    Relax.value += 1;
                 }
-                else if (Relax.value == 10)
+                else if (maxVal == relaxValue)
                 {
-                    collectedEmotions[3] = AddMax(collectedEmotions[3]);
-                    Relax.value = 0;
+                    currentState = State.Calm;
+                    if (Relax.value < 10)
+                    {
+                        Relax.value += 1;
+                    }
+                    else if (Relax.value == 10)
+                    {
+                        collectedEmotions[3] = AddMax(collectedEmotions[3]);
+                        Relax.value = 0;
+
+                    }
                 }
             }
         }
