@@ -20,10 +20,16 @@ public class MusicController : MonoBehaviour
     public GameObject StressParticles;
     public GameObject AtmosphereTitle;
     public Text AtmosphereTitleText;
+    public GameObject excitedTimeText;
+    public GameObject focusTimeText;
+    public GameObject stressTimeText;
+    public GameObject relaxedTimeText;
+    
     public enum ChargeState {Calm, Stress, Excited, Focus}
     //public enum HeartRateBar { HeartRate }
     public ChargeState currentChargeState;
     public GameObject chargePopUp;
+    public GameObject notEnoughPopup;
     public float chargeTime = 10.0f;
     public bool atmTimerIsRunning = false;
     public float atmTimeRemaining = 0;
@@ -46,12 +52,19 @@ public class MusicController : MonoBehaviour
         strTimeRemaining = chargeTime;
         Debug.Log("Start is called");
         chargePopUp.SetActive(false);
+        notEnoughPopup.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-         if (atmTimerIsRunning)
+        UpdateAtmosTimers();
+        excitedTimeText.GetComponent<UnityEngine.UI.Text>().text = Mathf.FloorToInt(excTimeRemaining / 60).ToString() + ":" + Mathf.FloorToInt(excTimeRemaining % 60).ToString();
+        focusTimeText.GetComponent<UnityEngine.UI.Text>().text = Mathf.FloorToInt(focTimeRemaining / 60).ToString() + ":" + Mathf.FloorToInt(focTimeRemaining % 60).ToString();
+        stressTimeText.GetComponent<UnityEngine.UI.Text>().text = Mathf.FloorToInt(strTimeRemaining / 60).ToString() + ":" + Mathf.FloorToInt(strTimeRemaining % 60).ToString();
+        relaxedTimeText.GetComponent<UnityEngine.UI.Text>().text = Mathf.FloorToInt(calTimeRemaining / 60).ToString() + ":" + Mathf.FloorToInt(calTimeRemaining % 60).ToString();
+
+        if (atmTimerIsRunning)
         {
             if (atmTimeRemaining > 0)
             {
@@ -66,7 +79,8 @@ public class MusicController : MonoBehaviour
                 atmTimerIsRunning = false;
                 Debug.Log("Should play Base now");
             }
-        }       
+        }    
+
     }
 
     public void playBase(){
@@ -83,6 +97,7 @@ public class MusicController : MonoBehaviour
 
     public void playCalm(){
         if(calTimeRemaining > 0){
+            gameObject.GetComponent<LevelManager>().SetAtmosInActive();
             StopAtmTimer();
             Debug.Log("Calm Time remaining: " + calTimeRemaining);
             source.clip = calm;
@@ -99,11 +114,13 @@ public class MusicController : MonoBehaviour
         }
         else{
             Debug.Log("Not enough charge!");
+            StartCoroutine(NotEnoughCharge());
         }
     }
 
     public void playExcited(){
         if(excTimeRemaining > 0){
+            gameObject.GetComponent<LevelManager>().SetAtmosInActive();
             StopAtmTimer();
             Debug.Log("Excited Time remaining: " + excTimeRemaining);
             source.clip = excited;
@@ -120,11 +137,13 @@ public class MusicController : MonoBehaviour
         }
         else{
             Debug.Log("Not enough charge!");
+            StartCoroutine(NotEnoughCharge());
         }
     }
 
     public void playStress(){
         if(strTimeRemaining > 0){
+            gameObject.GetComponent<LevelManager>().SetAtmosInActive();
             StopAtmTimer();
             Debug.Log("StressTime remaining: " + strTimeRemaining);
             source.clip = stress;
@@ -141,11 +160,13 @@ public class MusicController : MonoBehaviour
         }
         else{
             Debug.Log("Not enough charge!");
+            StartCoroutine(NotEnoughCharge());
         }
     }
 
     public void playFocus(){
         if(focTimeRemaining > 0){
+            gameObject.GetComponent<LevelManager>().SetAtmosInActive();
             StopAtmTimer();
             Debug.Log("Focus Time remaining: " + focTimeRemaining);
             source.clip = focus;
@@ -162,11 +183,22 @@ public class MusicController : MonoBehaviour
         }
         else{
             Debug.Log("Not enough charge!");
+            StartCoroutine(NotEnoughCharge());
         }
     }
 
+    IEnumerator NotEnoughCharge(){
+        notEnoughPopup.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        notEnoughPopup.SetActive(false);
+    }
     public void StopAtmTimer(){
         atmTimerIsRunning = false;
+        UpdateAtmosTimers();
+        //playBase();
+    }
+
+    public void UpdateAtmosTimers(){
         switch(Character.boostedState){
             case CharacterChangeManager.State.Calm:
                 calTimeRemaining = atmTimeRemaining;
@@ -181,7 +213,6 @@ public class MusicController : MonoBehaviour
                 strTimeRemaining = atmTimeRemaining;
             break;
         }
-        //playBase();
     }
     public void PauseTimer(){
         atmTimerIsRunning = false;
