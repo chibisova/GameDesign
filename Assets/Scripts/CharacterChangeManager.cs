@@ -92,7 +92,7 @@ public class CharacterChangeManager : MonoBehaviour
     void Start(){
         HeartRatePlugin.Event += OnHeartRateEvent; // HeartRate
 
-        //StartCoroutine(StartScanning());
+        StartCoroutine(StartScanning());
 
         anim = Player.GetComponent<Animator>();
         rand = new System.Random();
@@ -237,9 +237,9 @@ public class CharacterChangeManager : MonoBehaviour
 
 
             //heartBeat = (float)(50 + rand.NextDouble() * 50); // For testing without the device
-            heartBeat = (float) 90;
+            //heartBeat = (float) 90;
             // Reading data from the device
-            /*if (SensorId != null)
+            if (SensorId != null)
             {
                 if (HeartRateSensor.Sensors[SensorId] != null)
                 {
@@ -250,7 +250,7 @@ public class CharacterChangeManager : MonoBehaviour
             {
                 heartBeat = 0;
                 Debug.Log("NO SIGNAL");
-            }*/
+            }
 
 
             float boostHeartBeat = heartBeat;
