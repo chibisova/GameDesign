@@ -148,6 +148,14 @@ public class CharacterChangeManager : MonoBehaviour
                     {
                         Excited.gameObject.transform.Find("Excited Timer").Find("Image").GetComponent<Image>().fillAmount = (ForceChange.GetComponent<ForceChange>().timeRemaining / 30);
 
+                    } else if (ForceChange.GetComponent<ForceChange>().forcedFocus)
+                    {
+                        Focus.gameObject.transform.Find("Focus Timer").Find("Image").GetComponent<Image>().fillAmount = (ForceChange.GetComponent<ForceChange>().timeRemaining / 30);
+
+                    } else if (ForceChange.GetComponent<ForceChange>().forcedStress)
+                    {
+                        Stress.gameObject.transform.Find("Stress Timer").Find("Image").GetComponent<Image>().fillAmount = (ForceChange.GetComponent<ForceChange>().timeRemaining / 30);
+
                     }
                     //ForceChange.GetComponent<ForceChange>().fillTimer.fillAmont = ForceChange.GetComponent<ForceChange>().timeRemaining / ForceChange.GetComponent<ForceChange>().timeRemaining;
                     //Debug.Log("Time: " + ForceChange.GetComponent<ForceChange>().timeRemaining);
@@ -160,6 +168,8 @@ public class CharacterChangeManager : MonoBehaviour
                     ForceChange.GetComponent<ForceChange>().forceActive = false;
                     ForceChange.GetComponent<ForceChange>().forcedCalm = false;
                     ForceChange.GetComponent<ForceChange>().forcedExcited = false;
+                    ForceChange.GetComponent<ForceChange>().forcedStress = false;
+                    ForceChange.GetComponent<ForceChange>().forcedFocus = false;
 
                 }
             }
@@ -379,13 +389,15 @@ public class CharacterChangeManager : MonoBehaviour
             }
             if (ForceChange.GetComponent<ForceChange>().forceActive)
             {
-                if ((ForceChange.GetComponent<ForceChange>().forcedExcited))
-                {
+                if ((ForceChange.GetComponent<ForceChange>().forcedExcited)){
                     currentState = State.Excited;
                 }
-                else if (ForceChange.GetComponent<ForceChange>().forcedCalm)
-                {
+                else if (ForceChange.GetComponent<ForceChange>().forcedCalm){
                     currentState = State.Calm;
+                } else if (ForceChange.GetComponent<ForceChange>().forcedStress){
+                    currentState = State.Stress;
+                } else if (ForceChange.GetComponent<ForceChange>().forcedFocus){
+                    currentState = State.Focus;
                 }
                 if (maxVal == focusValue)
                 {

@@ -24,9 +24,12 @@ public class PlayerController : MonoBehaviour
 
     // Respawn
     public bool dead = false;
+    private bool runnable = true;
     public GameObject SpawnPoint;
 
     public GameObject background;
+
+    public GameObject deathEffect;
 
 
     // Soul Dialogue
@@ -47,31 +50,31 @@ public class PlayerController : MonoBehaviour
         dirX = Input.GetAxisRaw("Horizontal");
         velocity.x = dirX * moveSpeed;
 
+            if (dirX != 0f){
+                anim.SetBool("running", true);
+                if (dirX > 0 && !facingRight)
+                {
+                    facingRight = true;
+                    t.localScale = new Vector3(Mathf.Abs(t.localScale.x), t.localScale.y, t.localScale.z);
+                }
+                if (dirX < 0 && facingRight)
+                {
+                    facingRight = false;
+                    t.localScale = new Vector3(-Mathf.Abs(t.localScale.x), t.localScale.y, t.localScale.z);
+                }
+            } else{
+                anim.SetBool("running", false);
+            };
 
-        if (dirX != 0f){
-            anim.SetBool("running", true);
-            if (dirX > 0 && !facingRight)
+        if (!dead){
+            if (Input.GetButtonDown("Jump") && IsGrounded())
             {
-                facingRight = true;
-                t.localScale = new Vector3(Mathf.Abs(t.localScale.x), t.localScale.y, t.localScale.z);
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
-            if (dirX < 0 && facingRight)
-            {
-                facingRight = false;
-                t.localScale = new Vector3(-Mathf.Abs(t.localScale.x), t.localScale.y, t.localScale.z);
-            }
-        } else{
-            anim.SetBool("running", false);
-        };
-
-
-        if (Input.GetButtonDown("Jump") && IsGrounded())
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
 
-        if (dead){
-            Respawn();
+        if (dead && runnable){
+            StartCoroutine(RespawnTimer());
         }
     
         //ChangeMode();
@@ -88,8 +91,22 @@ public class PlayerController : MonoBehaviour
     }
 
     void FixedUpdate(){
-        rb.velocity = new Vector2(velocity.x, rb.velocity.y);
-        HandleAnimations();
+        if (!dead){
+            rb.velocity = new Vector2(velocity.x, rb.velocity.y);
+            HandleAnimations();
+        }
+    }
+
+    private IEnumerator RespawnTimer(){
+        runnable = false;
+        //Instantiate(deathEffect, transform.position, Quaternion.identity);
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        yield return new WaitForSeconds(2.0f);
+        transform.position = SpawnPoint.transform.position;
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        yield return new WaitForSeconds(1.0f);
+        dead = false;
+        runnable = true;
     }
 
     private bool IsGrounded()

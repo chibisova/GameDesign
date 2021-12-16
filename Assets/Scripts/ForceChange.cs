@@ -20,6 +20,8 @@ public class ForceChange : MonoBehaviour
     public bool forceActive = false;
     public bool forcedCalm = false;
     public bool forcedExcited = false;
+    public bool forcedFocus = false;
+    public bool forcedStress = false;
     public Image fillTimer;
 
     public float timeRemaining = 30;
@@ -39,14 +41,27 @@ public class ForceChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Character.GetComponent<CharacterChangeManager>().collectedEmotions[3] > 0 && !timerIsRunning)
-        {
+        if (Character.GetComponent<CharacterChangeManager>().collectedEmotions[3] > 0 && !timerIsRunning){
             calmButton.GetComponent<Button>().interactable = true;
 
+        } else {
+            calmButton.GetComponent<Button>().interactable = false;
         }
-        if (Character.GetComponent<CharacterChangeManager>().collectedEmotions[1] > 0 && !timerIsRunning)
-        {
+        if (Character.GetComponent<CharacterChangeManager>().collectedEmotions[1] > 0 && !timerIsRunning) {
             excitedButton.GetComponent<Button>().interactable = true;
+        } else {
+            excitedButton.GetComponent<Button>().interactable = false;
+        }
+
+        if (Character.GetComponent<CharacterChangeManager>().collectedEmotions[0] > 0 && !timerIsRunning) {
+            focusButton.GetComponent<Button>().interactable = true;
+        } else {
+            focusButton.GetComponent<Button>().interactable = false;
+        }
+        if (Character.GetComponent<CharacterChangeManager>().collectedEmotions[2] > 0 && !timerIsRunning) {
+            stressButton.GetComponent<Button>().interactable = true;
+        } else {
+            stressButton.GetComponent<Button>().interactable = false;
         }
     }
 
@@ -65,55 +80,58 @@ public class ForceChange : MonoBehaviour
 
     public void onClickCalm()
     {
-        if (Character.GetComponent<CharacterChangeManager>().collectedEmotions[3] > 0)
-        {
-            anim.runtimeAnimatorController = CalmAnim as RuntimeAnimatorController;
-            MainUIController.GetComponent<UIController>().slots[3].transform.GetChild(Character.GetComponent<CharacterChangeManager>().collectedEmotions[3]).gameObject.SetActive(false);
-            Character.GetComponent<CharacterChangeManager>().collectedEmotions[3] -= 1;
+        anim.runtimeAnimatorController = CalmAnim as RuntimeAnimatorController;
+        Player.GetComponent<SpriteRenderer>().color = Color.white;
+        Character.GetComponent<CharacterChangeManager>().currentState = CharacterChangeManager.State.Calm;
+        MainUIController.GetComponent<UIController>().slots[3].transform.GetChild(Character.GetComponent<CharacterChangeManager>().collectedEmotions[3]).gameObject.SetActive(false);
+        Character.GetComponent<CharacterChangeManager>().collectedEmotions[3] -= 1;
 
-            timerIsRunning = true;
-            forcedCalm = true;
-            forceActive = true;
-            calmButton.GetComponent<Button>().interactable = false;
-            excitedButton.GetComponent<Button>().interactable = false;
-            //renderCanvas();
-        } else
-        {
-            calmButton.GetComponent<Button>().interactable = false;
-        }
+        timerIsRunning = true;
+        forcedCalm = true;
+        forceActive = true;
+        //renderCanvas();
     }
 
     public void onClickExcited()
     {
-        if (Character.GetComponent<CharacterChangeManager>().collectedEmotions[1] > 0)
-        {
-            anim.runtimeAnimatorController = ExcitedAnim as RuntimeAnimatorController;
-            MainUIController.GetComponent<UIController>().slots[1].transform.GetChild(Character.GetComponent<CharacterChangeManager>().collectedEmotions[1]).gameObject.SetActive(false);
-            Character.GetComponent<CharacterChangeManager>().collectedEmotions[1] -= 1;
+        anim.runtimeAnimatorController = ExcitedAnim as RuntimeAnimatorController;
+        Player.GetComponent<SpriteRenderer>().color = Color.white;
+        Character.GetComponent<CharacterChangeManager>().currentState = CharacterChangeManager.State.Excited;
+        MainUIController.GetComponent<UIController>().slots[1].transform.GetChild(Character.GetComponent<CharacterChangeManager>().collectedEmotions[1]).gameObject.SetActive(false);
+        Character.GetComponent<CharacterChangeManager>().collectedEmotions[1] -= 1;
 
-            timerIsRunning = true;
-            forcedExcited = true;
-            forceActive = true;
-            calmButton.GetComponent<Button>().interactable = false;
-            excitedButton.GetComponent<Button>().interactable = false;
-            //renderCanvas();
-        } else
-        {
-            excitedButton.GetComponent<Button>().interactable = false;
-        }
+        timerIsRunning = true;
+        forcedExcited = true;
+        forceActive = true;
+        //renderCanvas();
 
     }
 
     public void onClickFocus()
     {
+        anim.runtimeAnimatorController = CalmAnim as RuntimeAnimatorController;
+        Player.GetComponent<SpriteRenderer>().color = Color.gray;
+        Character.GetComponent<CharacterChangeManager>().currentState = CharacterChangeManager.State.Focus;
+        MainUIController.GetComponent<UIController>().slots[0].transform.GetChild(Character.GetComponent<CharacterChangeManager>().collectedEmotions[0]).gameObject.SetActive(false);
+        Character.GetComponent<CharacterChangeManager>().collectedEmotions[0] -= 1;
 
-
+        timerIsRunning = true;
+        forcedFocus = true;
+        forceActive = true;
     }
 
 
     public void onClickStress()
     {
+        anim.runtimeAnimatorController = ExcitedAnim as RuntimeAnimatorController;
+        Player.GetComponent<SpriteRenderer>().color = Color.red;
+        Character.GetComponent<CharacterChangeManager>().currentState = CharacterChangeManager.State.Stress;
+        MainUIController.GetComponent<UIController>().slots[2].transform.GetChild(Character.GetComponent<CharacterChangeManager>().collectedEmotions[2]).gameObject.SetActive(false);
+        Character.GetComponent<CharacterChangeManager>().collectedEmotions[2] -= 1;
 
+        timerIsRunning = true;
+        forcedStress = true;
+        forceActive = true;
     }
 
     /*
