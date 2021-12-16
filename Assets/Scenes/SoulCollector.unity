@@ -81015,6 +81015,8 @@ MonoBehaviour:
   CalmAnim: {fileID: 22100000, guid: 7eec27c9d44184640b64e11b81594b32, type: 2}
   ExcitedAnim: {fileID: 22100000, guid: 9c6d0dbd67c234271a6d205342719db6, type: 2}
   BaselineAnim: {fileID: 22100000, guid: a75908819e4dd4f2690ed9c8706e3d82, type: 2}
+  FocusAnim: {fileID: 22100000, guid: ad34bca82199e40e4a683ae54c45ce42, type: 2}
+  StressAnim: {fileID: 22100000, guid: 97db7a191a61842e4baf1420827916f8, type: 2}
 --- !u!114 &1525134477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97642,6 +97644,8 @@ MonoBehaviour:
   CalmAnim: {fileID: 22100000, guid: 7eec27c9d44184640b64e11b81594b32, type: 2}
   ExcitedAnim: {fileID: 22100000, guid: 9c6d0dbd67c234271a6d205342719db6, type: 2}
   BaselineAnim: {fileID: 22100000, guid: a75908819e4dd4f2690ed9c8706e3d82, type: 2}
+  FocusAnim: {fileID: 0}
+  StressAnim: {fileID: 0}
 --- !u!1001 &3467857148164460896
 PrefabInstance:
   m_ObjectHideFlags: 0

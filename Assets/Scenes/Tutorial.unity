@@ -10390,10 +10390,21 @@ MonoBehaviour:
   Excited: {fileID: 340402291}
   Relax: {fileID: 1248420185}
   Stress: {fileID: 1019276455}
+  calmLowerBoundary: 0
+  calmRefValue: 0
+  calmUpperBoundary: 0
+  focusRefValue: 0
+  focusUpperBoundary: 0
+  avgUpperBoundary: 4
+  excRefValue: 8
+  excUpperBoundary: 12
+  stressRefValue: 16
+  stressUpperBoundary: 20
   focusValue: 0
   excitedValue: 0
   relaxValue: 0
   stressValue: 0
+  baselineValue: 0
   CurrentHeartValue: {fileID: 1175577852}
   StatusText: {fileID: 1829993331}
   CalibrationScreen: {fileID: 1550210567}
@@ -10402,6 +10413,8 @@ MonoBehaviour:
   CalmAnim: {fileID: 22100000, guid: 7eec27c9d44184640b64e11b81594b32, type: 2}
   ExcitedAnim: {fileID: 22100000, guid: 9c6d0dbd67c234271a6d205342719db6, type: 2}
   BaselineAnim: {fileID: 22100000, guid: a75908819e4dd4f2690ed9c8706e3d82, type: 2}
+  FocusAnim: {fileID: 22100000, guid: ad34bca82199e40e4a683ae54c45ce42, type: 2}
+  StressAnim: {fileID: 22100000, guid: 97db7a191a61842e4baf1420827916f8, type: 2}
 --- !u!4 &530279161
 Transform:
   m_ObjectHideFlags: 0

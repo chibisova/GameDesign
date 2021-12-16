@@ -95,6 +95,8 @@ public class CharacterChangeManager : MonoBehaviour
     public AnimatorOverrideController CalmAnim;
     public AnimatorOverrideController ExcitedAnim;
     public AnimatorOverrideController BaselineAnim;
+    public AnimatorOverrideController FocusAnim;
+    public AnimatorOverrideController StressAnim;
 
     private System.Random rand;
 
@@ -138,17 +140,13 @@ public class CharacterChangeManager : MonoBehaviour
         {
             if (currentState == State.Calm) {
                 anim.runtimeAnimatorController = CalmAnim as RuntimeAnimatorController;
-                Player.GetComponent<SpriteRenderer>().color = Color.white;
             } else if (currentState == State.Excited) {
                 anim.runtimeAnimatorController = ExcitedAnim as RuntimeAnimatorController;
-                Player.GetComponent<SpriteRenderer>().color = Color.white;
             } else if (currentState == State.Stress){
-                anim.runtimeAnimatorController = ExcitedAnim as RuntimeAnimatorController;
-                Player.GetComponent<SpriteRenderer>().color = Color.red;
+                anim.runtimeAnimatorController = StressAnim as RuntimeAnimatorController;
             } else if (currentState == State.Focus){ 
-                anim.runtimeAnimatorController = CalmAnim as RuntimeAnimatorController;
-                Player.GetComponent<SpriteRenderer>().color = Color.gray;
-            }else {
+                anim.runtimeAnimatorController = FocusAnim as RuntimeAnimatorController;
+            } else {
                 anim.runtimeAnimatorController = BaselineAnim as RuntimeAnimatorController;
             }
         } else //Start Timer
