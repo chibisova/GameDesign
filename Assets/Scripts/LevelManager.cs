@@ -77,7 +77,6 @@ public class LevelManager : MonoBehaviour
         } else {
             Player.GetComponent<PlayerController>().enabled= true;
             SelectMenu.SetActive(false);
-            gameObject.GetComponent<MusicController>().ContinueTimer();
         }
 
 
