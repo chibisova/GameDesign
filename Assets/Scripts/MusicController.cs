@@ -30,7 +30,7 @@ public class MusicController : MonoBehaviour
     public ChargeState currentChargeState;
     public GameObject chargePopUp;
     public GameObject notEnoughPopup;
-    public float chargeTime = 10.0f;
+    public float chargeTime = 30.0f;
     public bool atmTimerIsRunning = false;
     public float atmTimeRemaining = 0;
     private float calTimeRemaining = 0;
