@@ -18,7 +18,7 @@ public class SceneController : MonoBehaviour
     }
 
     public void StartGame(){
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("SoulCollection");
     }
 
     public void StartTutorial(){

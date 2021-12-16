@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
 
             if (val < 3){
                 Level.GetComponent<CharacterChangeManager>().collectedEmotions[4]++;
-                GameObject.Find("Wildcard (new)").transform.Find("Counter").Find("Text").GetComponent<Text>().text = (Level.GetComponent<CharacterChangeManager>().collectedEmotions[4] - 1).ToString();
+                GameObject.Find("Wildcard (new)").transform.Find("Counter").Find("Text").GetComponent<Text>().text = Level.GetComponent<CharacterChangeManager>().collectedEmotions[4].ToString();
                 Debug.Log("Bonus: " + Level.GetComponent<CharacterChangeManager>().collectedEmotions[4]);
             }
 

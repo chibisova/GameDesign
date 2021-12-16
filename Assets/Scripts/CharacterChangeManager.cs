@@ -236,8 +236,8 @@ public class CharacterChangeManager : MonoBehaviour
             yield return new WaitForSeconds(3.0f);
 
 
-            heartBeat = (float)(50 + rand.NextDouble() * 50); // For testing without the device
-            //heartBeat = (float) 50;
+            //heartBeat = (float)(50 + rand.NextDouble() * 50); // For testing without the device
+            heartBeat = (float) 90;
             // Reading data from the device
             /*if (SensorId != null)
             {
@@ -334,7 +334,7 @@ public class CharacterChangeManager : MonoBehaviour
             HeartRate.value = (float)(boostHeartBeat);
 
             HeartRate.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = ColorChange(boostHeartBeat);
-            //GameObject.Find("Wildcard (new)").transform.Find("Counter").Find("Text").GetComponent<Text>().text = (Level.GetComponent<CharacterChangeManager>().collectedEmotions[4] - 1).ToString();
+            //GameObject.Find("Wildcard (new)").transform.Find("Counter").Find("Text").GetComponent<Text>().text = (collectedEmotions[4]).ToString();
 
             //HeartRate.gameObject.transform.Find("Handle Slide Area").value = boostHeartBeat;
             //HeartRate.gameObject.transform.Find("Handle Slide Area").Find("Handle").position = boostHeartBeat;

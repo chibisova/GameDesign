@@ -98,6 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Level: {fileID: 0}
+  jumpableGround:
+    serializedVersion: 2
+    m_Bits: 64
   mass: 15
 --- !u!61 &4599787617039103910
 BoxCollider2D:

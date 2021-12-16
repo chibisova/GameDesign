@@ -129503,6 +129503,7 @@ MonoBehaviour:
   dead: 0
   SpawnPoint: {fileID: 1720149784}
   background: {fileID: 1881255066}
+  deathEffect: {fileID: 5046042989622923874, guid: 2830660519e4341d380bb70235c6de6f, type: 3}
   neverMetSoul: 1
   Level: {fileID: 530279157}
 --- !u!212 &2080811922

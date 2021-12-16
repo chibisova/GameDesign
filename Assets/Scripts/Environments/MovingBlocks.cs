@@ -6,6 +6,8 @@ public class MovingBlocks : MonoBehaviour
 {
     public GameObject Level;
     private Rigidbody2D rb;
+    private BoxCollider2D coll;
+    [SerializeField] private LayerMask jumpableGround;
 
     public int mass = 5;
 
@@ -13,12 +15,16 @@ public class MovingBlocks : MonoBehaviour
     void Start()
     {
         rb= GetComponent<Rigidbody2D>();
+        coll = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // Debug.Log(IsGrounded());
+        // if (!IsGrounded()){
+        //     rb.bodyType = RigidbodyType2D.Dynamic;
+        // }
     }
 
     bool canPush(){
@@ -40,8 +46,6 @@ public class MovingBlocks : MonoBehaviour
     }  
 
     private void OnCollisionExit2D(Collision2D collision){ 
-        if (canPush()){
-            rb.bodyType = RigidbodyType2D.Static;
-        }
+        rb.velocity = new Vector2(0, rb.velocity.y);
     }  
 }
