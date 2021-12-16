@@ -105,7 +105,7 @@ public class LevelManager : MonoBehaviour
 
 
     public void ExitToMap(){
-        SceneManager.LoadScene("MapScene");
+        SceneManager.LoadScene("StartScene");
     }
 
     public void QuitGame(){
