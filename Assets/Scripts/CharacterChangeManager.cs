@@ -349,6 +349,10 @@ public class CharacterChangeManager : MonoBehaviour
             HeartRate.value = (float)(boostHeartBeat);
 
             HeartRate.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = ColorChange(boostHeartBeat);
+            HeartRate.gameObject.transform.GetComponent<Slider>().minValue = averageHeartBeat - stressUpperBoundary;
+            HeartRate.gameObject.transform.GetComponent<Slider>().maxValue = averageHeartBeat + stressUpperBoundary;
+
+
             //GameObject.Find("Wildcard (new)").transform.Find("Counter").Find("Text").GetComponent<Text>().text = (collectedEmotions[4]).ToString();
 
             //HeartRate.gameObject.transform.Find("Handle Slide Area").value = boostHeartBeat;
