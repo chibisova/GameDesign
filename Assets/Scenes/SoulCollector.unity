@@ -80680,6 +80680,16 @@ MonoBehaviour:
   Excited: {fileID: 1023781781}
   Relax: {fileID: 1158797115}
   Stress: {fileID: 1452270832}
+  calmLowerBoundary: 0
+  calmRefValue: 0
+  calmUpperBoundary: 0
+  focusRefValue: 0
+  focusUpperBoundary: 0
+  avgUpperBoundary: 4
+  excRefValue: 8
+  excUpperBoundary: 12
+  stressRefValue: 16
+  stressUpperBoundary: 20
   focusValue: 0
   excitedValue: 0
   relaxValue: 0
@@ -97140,6 +97150,16 @@ MonoBehaviour:
   Excited: {fileID: 1023781781}
   Relax: {fileID: 1158797115}
   Stress: {fileID: 1452270832}
+  calmLowerBoundary: 0
+  calmRefValue: 0
+  calmUpperBoundary: 0
+  focusRefValue: 0
+  focusUpperBoundary: 0
+  avgUpperBoundary: 4
+  excRefValue: 8
+  excUpperBoundary: 12
+  stressRefValue: 16
+  stressUpperBoundary: 20
   focusValue: 0
   excitedValue: 0
   relaxValue: 0

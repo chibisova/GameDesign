@@ -78,6 +78,7 @@ public class CharacterChangeManager : MonoBehaviour
     public float excitedValue;
     public float relaxValue;
     public float stressValue;
+    public float baselineValue;
 
     // Callibration
     private bool calibrating = false;
@@ -102,9 +103,9 @@ public class CharacterChangeManager : MonoBehaviour
     private IEnumerator measure;
 
     void Start(){
-        //HeartRatePlugin.Event += OnHeartRateEvent; // HeartRate
+        HeartRatePlugin.Event += OnHeartRateEvent; // HeartRate
 
-        //StartCoroutine(StartScanning());
+        StartCoroutine(StartScanning());
 
         anim = Player.GetComponent<Animator>();
         rand = new System.Random();
@@ -253,21 +254,23 @@ public class CharacterChangeManager : MonoBehaviour
             yield return new WaitForSeconds(3.0f);
 
 
-            heartBeat = (float)(averageHeartBeat - stressUpperBoundary + rand.NextDouble() * (2*stressUpperBoundary)); // For testing without the device
-            //heartBeat = (float) 90;
-            // Reading data from the device
-            // if (SensorId != null)
-            // {
-            //     if (HeartRateSensor.Sensors[SensorId] != null)
-            //     {
-            //         heartBeat = (float)HeartRateSensor.Sensors[SensorId].PulseRate;
-            //     }
-            // }
-            // else
-            // {
-            //     heartBeat = 0;
-            //     Debug.Log("NO SIGNAL");
-            // }
+            //heartBeat = (float)(averageHeartBeat - stressUpperBoundary + rand.NextDouble() * (2*stressUpperBoundary)); // For testing without the device
+            //heartBeat = (float)90;
+            //Reading data from the device
+             if (SensorId != null)
+            {
+                if (HeartRateSensor.Sensors[SensorId] != null)
+                {
+                    Debug.Log("Error: " + HeartRateSensor.Sensors[SensorId]);
+
+                    heartBeat = (float)HeartRateSensor.Sensors[SensorId].PulseRate;
+                }
+            }
+            else
+            {
+                heartBeat = 0;
+                Debug.Log("NO SIGNAL");
+            }
 
 
             float boostHeartBeat = heartBeat;
@@ -339,10 +342,11 @@ public class CharacterChangeManager : MonoBehaviour
             int calmRef = averageHeartBeat - stressUpperBoundary;
             int excitedRef = averageHeartBeat + avgUpperBoundary;
             int stressRef = averageHeartBeat + stressUpperBoundary;
-            focusValue = (float)(- Mathf.Abs(boostHeartBeat - focusRef));
-            excitedValue = (float)(- Mathf.Abs(boostHeartBeat - excitedRef));
-            relaxValue = (float)(- Mathf.Abs(boostHeartBeat - calmRef));
-            stressValue = (float)(- Mathf.Abs(boostHeartBeat - stressRef));
+            focusValue = (float)(100 - Mathf.Abs(boostHeartBeat - focusRef));
+            excitedValue = (float)(100 - Mathf.Abs(boostHeartBeat - excitedRef));
+            relaxValue = (float)(100 - Mathf.Abs(boostHeartBeat - calmRef));
+            stressValue = (float)(100 - Mathf.Abs(boostHeartBeat - stressRef));
+            baselineValue = (float)(100 -  Mathf.Abs(boostHeartBeat - averageHeartBeat));
 
             HeartRate.value = (float)(boostHeartBeat);
 
@@ -363,15 +367,15 @@ public class CharacterChangeManager : MonoBehaviour
         {
             color = Color.blue;
         }
-        else if (heartBeat > averageHeartBeat - excUpperBoundary && heartBeat <= averageHeartBeat - avgUpperBoundary)
+        else if ((heartBeat > averageHeartBeat - excUpperBoundary) && (heartBeat <= averageHeartBeat - avgUpperBoundary))
         {
             color = Color.grey;
         }
-        else if (heartBeat > averageHeartBeat - avgUpperBoundary && heartBeat <= averageHeartBeat + avgUpperBoundary)
+        else if ((heartBeat > averageHeartBeat - avgUpperBoundary) && (heartBeat <= averageHeartBeat + avgUpperBoundary))
         {
             color = Color.white;
         }
-        else if (heartBeat > averageHeartBeat + avgUpperBoundary && heartBeat < averageHeartBeat + excUpperBoundary)
+        else if ((heartBeat > averageHeartBeat + avgUpperBoundary) && (heartBeat <= averageHeartBeat + excUpperBoundary))
         {
             color = Color.yellow;
         }
@@ -394,7 +398,7 @@ public class CharacterChangeManager : MonoBehaviour
             yield return new WaitForSeconds(3.0f); // do this every 5 seconds
 
 
-            double maxVal = Math.Max(relaxValue, Math.Max(focusValue, Math.Max(stressValue, excitedValue)));
+            double maxVal = Math.Max(relaxValue, Math.Max(focusValue, Math.Max(baselineValue, Math.Max(stressValue, excitedValue))));
 
             if (maxVal == 0)
             {
@@ -478,6 +482,10 @@ public class CharacterChangeManager : MonoBehaviour
                 }
                 else if (maxVal == excitedValue)
                 {
+                    Debug.Log("Im excited: " + excitedValue);
+                    Debug.Log("Baseline: " + baselineValue);
+
+
                     currentState = State.Excited;
                     if (Excited.value < 10)
                     {
@@ -515,6 +523,11 @@ public class CharacterChangeManager : MonoBehaviour
                         collectedEmotions[3] = AddMax(collectedEmotions[3]);
                         Relax.value = 0;
                     }
+                }
+                else if (maxVal == baselineValue)
+                {
+                    Debug.Log("Im here: " + baselineValue);
+                    currentState = State.Baseline;
                 }
             }
         }
