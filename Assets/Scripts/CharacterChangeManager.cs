@@ -127,9 +127,9 @@ public class CharacterChangeManager : MonoBehaviour
             } else if (currentState == State.Stress){
                 anim.runtimeAnimatorController = ExcitedAnim as RuntimeAnimatorController;
                 Player.GetComponent<SpriteRenderer>().color = Color.red;
-            } else if (currentState == State.Calm){ 
+            } else if (currentState == State.Focus){ 
                 anim.runtimeAnimatorController = CalmAnim as RuntimeAnimatorController;
-                Player.GetComponent<SpriteRenderer>().color = Color.grey;
+                Player.GetComponent<SpriteRenderer>().color = Color.gray;
             }else {
                 anim.runtimeAnimatorController = BaselineAnim as RuntimeAnimatorController;
             }
