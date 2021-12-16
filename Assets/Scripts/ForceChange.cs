@@ -16,6 +16,9 @@ public class ForceChange : MonoBehaviour
     public AnimatorOverrideController CalmAnim;
     public AnimatorOverrideController ExcitedAnim;
     public AnimatorOverrideController BaselineAnim;
+    public AnimatorOverrideController FocusAnim;
+    public AnimatorOverrideController StressAnim;
+
 
     public bool forceActive = false;
     public bool forcedCalm = false;
@@ -109,7 +112,7 @@ public class ForceChange : MonoBehaviour
 
     public void onClickFocus()
     {
-        anim.runtimeAnimatorController = CalmAnim as RuntimeAnimatorController;
+        anim.runtimeAnimatorController = FocusAnim as RuntimeAnimatorController;
         Player.GetComponent<SpriteRenderer>().color = Color.gray;
         Character.GetComponent<CharacterChangeManager>().currentState = CharacterChangeManager.State.Focus;
         MainUIController.GetComponent<UIController>().slots[0].transform.GetChild(Character.GetComponent<CharacterChangeManager>().collectedEmotions[0]).gameObject.SetActive(false);
@@ -123,7 +126,7 @@ public class ForceChange : MonoBehaviour
 
     public void onClickStress()
     {
-        anim.runtimeAnimatorController = ExcitedAnim as RuntimeAnimatorController;
+        anim.runtimeAnimatorController = StressAnim as RuntimeAnimatorController;
         Player.GetComponent<SpriteRenderer>().color = Color.red;
         Character.GetComponent<CharacterChangeManager>().currentState = CharacterChangeManager.State.Stress;
         MainUIController.GetComponent<UIController>().slots[2].transform.GetChild(Character.GetComponent<CharacterChangeManager>().collectedEmotions[2]).gameObject.SetActive(false);
