@@ -81177,7 +81177,7 @@ MonoBehaviour:
   currentChargeState: 0
   chargePopUp: {fileID: 1786663172}
   notEnoughPopup: {fileID: 1418000930}
-  chargeTime: 10
+  chargeTime: 30
   atmTimerIsRunning: 0
   atmTimeRemaining: 0
 --- !u!1001 &1525463820
