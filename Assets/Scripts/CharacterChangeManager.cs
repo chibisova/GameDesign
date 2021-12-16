@@ -62,6 +62,18 @@ public class CharacterChangeManager : MonoBehaviour
     public Slider Relax;
     public Slider Stress;
 
+    //Boundaries relative to the average
+    public int calmLowerBoundary;
+    public int calmRefValue;
+    public int calmUpperBoundary;
+    public int focusRefValue;
+    public int focusUpperBoundary;
+    public int avgUpperBoundary = 4;
+    public int excRefValue = 8;
+    public int excUpperBoundary = 12;
+    public int stressRefValue = 16;
+    public int stressUpperBoundary = 20;
+
     public float focusValue;
     public float excitedValue;
     public float relaxValue;
@@ -90,9 +102,9 @@ public class CharacterChangeManager : MonoBehaviour
     private IEnumerator measure;
 
     void Start(){
-        HeartRatePlugin.Event += OnHeartRateEvent; // HeartRate
+        //HeartRatePlugin.Event += OnHeartRateEvent; // HeartRate
 
-        StartCoroutine(StartScanning());
+        //StartCoroutine(StartScanning());
 
         anim = Player.GetComponent<Animator>();
         rand = new System.Random();
@@ -101,6 +113,11 @@ public class CharacterChangeManager : MonoBehaviour
         measure = MeasureEmotion();
         StartCoroutine(measure);
         StartCoroutine(CalculateEmotion());
+        calmLowerBoundary = -stressUpperBoundary;
+        calmRefValue = -stressRefValue;
+        calmUpperBoundary = -excUpperBoundary;
+        focusRefValue = -excRefValue;
+        focusUpperBoundary = -avgUpperBoundary;
     }
 
     IEnumerator StartScanning()
@@ -236,21 +253,21 @@ public class CharacterChangeManager : MonoBehaviour
             yield return new WaitForSeconds(3.0f);
 
 
-            //heartBeat = (float)(50 + rand.NextDouble() * 50); // For testing without the device
+            heartBeat = (float)(averageHeartBeat - stressUpperBoundary + rand.NextDouble() * (2*stressUpperBoundary)); // For testing without the device
             //heartBeat = (float) 90;
             // Reading data from the device
-            if (SensorId != null)
-            {
-                if (HeartRateSensor.Sensors[SensorId] != null)
-                {
-                    heartBeat = (float)HeartRateSensor.Sensors[SensorId].PulseRate;
-                }
-            }
-            else
-            {
-                heartBeat = 0;
-                Debug.Log("NO SIGNAL");
-            }
+            // if (SensorId != null)
+            // {
+            //     if (HeartRateSensor.Sensors[SensorId] != null)
+            //     {
+            //         heartBeat = (float)HeartRateSensor.Sensors[SensorId].PulseRate;
+            //     }
+            // }
+            // else
+            // {
+            //     heartBeat = 0;
+            //     Debug.Log("NO SIGNAL");
+            // }
 
 
             float boostHeartBeat = heartBeat;
@@ -273,7 +290,7 @@ public class CharacterChangeManager : MonoBehaviour
                 case State.Calm:
                     //currentMaxEmotion.text = "Relaxed";
                     //currentMaxEmotion.text.color = new Color32(52, 161, 207, 255);
-                    if (heartBeat > averageHeartBeat - 25)
+                    if (heartBeat > averageHeartBeat - stressUpperBoundary)
                     {
                         boostHeartBeat = heartBeat - modifier;
                     }
@@ -281,7 +298,7 @@ public class CharacterChangeManager : MonoBehaviour
                 case State.Excited:
                     //currentMaxEmotion.text = "Excited";
                     //currentMaxEmotion.text.color = new Color32(255, 245, 102, 255);
-                    if (heartBeat > averageHeartBeat + 15)
+                    if (heartBeat > averageHeartBeat + excUpperBoundary)
                     {
                         boostHeartBeat = heartBeat - modifier;
                     }
@@ -293,7 +310,7 @@ public class CharacterChangeManager : MonoBehaviour
                 case State.Focus:
                     //currentMaxEmotion.text = "Focused";
                     //currentMaxEmotion.text.color = new Color32(255, 255, 255, 150); 
-                    if (heartBeat > averageHeartBeat - 5)
+                    if (heartBeat > averageHeartBeat - avgUpperBoundary)
                     {
                         boostHeartBeat = heartBeat - modifier;
                     }
@@ -305,7 +322,7 @@ public class CharacterChangeManager : MonoBehaviour
                 case State.Stress:
                     //currentMaxEmotion.text = "Stressed";
                     //currentMaxEmotion.text.color = new Color32(255, 0, 0, 255);
-                    if (heartBeat < averageHeartBeat + 25)
+                    if (heartBeat < averageHeartBeat + stressUpperBoundary)
                     {
                         boostHeartBeat = heartBeat + modifier;
                     }
@@ -318,19 +335,15 @@ public class CharacterChangeManager : MonoBehaviour
 
             //Debug.Log("Boost:" + boostHeartBeat);
            // Debug.Log("Normal:" + heartBeat);
-            int focusRef = averageHeartBeat - 10;
-            int calmRef = averageHeartBeat - 25;
-            int excitedRef = averageHeartBeat + 10;
-            int stressRef = averageHeartBeat + 25;
-            focusValue = (float)(100 - Mathf.Abs(boostHeartBeat - focusRef) / 50 * 100);
-            excitedValue = (float)(100 - Mathf.Abs(boostHeartBeat - excitedRef) / 50 * 100);
-            relaxValue = (float)(100 - Mathf.Abs(boostHeartBeat - calmRef) / 50 * 100);
-            stressValue = (float)(100 - Mathf.Abs(boostHeartBeat - stressRef) / 50 * 100);
+            int focusRef = averageHeartBeat - avgUpperBoundary;
+            int calmRef = averageHeartBeat - stressUpperBoundary;
+            int excitedRef = averageHeartBeat + avgUpperBoundary;
+            int stressRef = averageHeartBeat + stressUpperBoundary;
+            focusValue = (float)(- Mathf.Abs(boostHeartBeat - focusRef));
+            excitedValue = (float)(- Mathf.Abs(boostHeartBeat - excitedRef));
+            relaxValue = (float)(- Mathf.Abs(boostHeartBeat - calmRef));
+            stressValue = (float)(- Mathf.Abs(boostHeartBeat - stressRef));
 
-            //Focus.value = (float) (100 - Mathf.Abs(boostHeartBeat - focusRef)/50 * 100); 
-            //Excited.value = (float) (100 - Mathf.Abs(boostHeartBeat - excitedRef)/50 * 100);
-            //Relax.value = (float) (100 - Mathf.Abs(boostHeartBeat - calmRef)/50 * 100);
-            //Stress.value = (float) (100 - Mathf.Abs(boostHeartBeat - stressRef)/50 * 100);
             HeartRate.value = (float)(boostHeartBeat);
 
             HeartRate.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = ColorChange(boostHeartBeat);
@@ -346,19 +359,19 @@ public class CharacterChangeManager : MonoBehaviour
     private Color ColorChange(float heartBeat)
     {
         Color color;
-        if (heartBeat <= 60)
+        if (heartBeat <= averageHeartBeat - excUpperBoundary)
         {
             color = Color.blue;
         }
-        else if (heartBeat > 60 && heartBeat <= 70)
+        else if (heartBeat > averageHeartBeat - excUpperBoundary && heartBeat <= averageHeartBeat - avgUpperBoundary)
         {
             color = Color.grey;
         }
-        else if (heartBeat > 70 && heartBeat <= 80)
+        else if (heartBeat > averageHeartBeat - avgUpperBoundary && heartBeat <= averageHeartBeat + avgUpperBoundary)
         {
             color = Color.white;
         }
-        else if (heartBeat > 80 && heartBeat < 90)
+        else if (heartBeat > averageHeartBeat + avgUpperBoundary && heartBeat < averageHeartBeat + excUpperBoundary)
         {
             color = Color.yellow;
         }
